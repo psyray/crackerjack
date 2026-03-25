@@ -1,33 +1,33 @@
-<ul class="nav nav-pills flex-column">
+<ul class="nav nav-pills session-subnav flex-row flex-lg-column flex-nowrap flex-lg-wrap">
     <li class="nav-item">
-        <a class="nav-link {{ 'active' if active_nav == 'session' }}" href="{{ url_for('sessions.view', session_id=session.id) }}"><i class="fas fa-fw fa-spinner mr-1"></i>Session</a>
+        <a class="nav-link text-center text-lg-left {{ 'active' if active_nav == 'session' }}" href="{{ url_for('sessions.view', session_id=session.id) }}" title="Session"><i class="fas fa-fw fa-spinner mr-0 mr-lg-1"></i><span class="d-none d-lg-inline">Session</span></a>
     </li>
     {% if session.hashcat.state != 1 %}
     <li class="nav-item">
-        <a class="nav-link {{ 'active' if active_nav == 'hashes' }}" href="{{ url_for('sessions.setup_hashes', session_id=session.id) }}"><i class="fas fa-fw fa-hashtag mr-1"></i>Hashes</a>
+        <a class="nav-link text-center text-lg-left {{ 'active' if active_nav == 'hashes' }}" href="{{ url_for('sessions.setup_hashes', session_id=session.id) }}" title="Hashes"><i class="fas fa-fw fa-hashtag mr-0 mr-lg-1"></i><span class="d-none d-lg-inline">Hashes</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ 'active' if active_nav == 'hashcat' }}" href="{{ url_for('sessions.setup_hashcat', session_id=session.id) }}"><i class="fas fa-fw fa-cat mr-1"></i>Hashcat</a>
+        <a class="nav-link text-center text-lg-left {{ 'active' if active_nav == 'hashcat' }}" href="{{ url_for('sessions.setup_hashcat', session_id=session.id) }}" title="Hashcat"><i class="fas fa-fw fa-cat mr-0 mr-lg-1"></i><span class="d-none d-lg-inline">Hashcat</span></a>
     </li>
         {% if session.hashcat.mode == 0 %}
     <li class="nav-item">
-        <a class="nav-link {{ 'active' if active_nav == 'wordlist' }}" href="{{ url_for('sessions.setup_wordlist', session_id=session.id) }}"><i class="fas fa-fw fa-file-alt mr-1"></i>Wordlist</a>
+        <a class="nav-link text-center text-lg-left {{ 'active' if active_nav == 'wordlist' }}" href="{{ url_for('sessions.setup_wordlist', session_id=session.id) }}" title="Wordlist"><i class="fas fa-fw fa-file-alt mr-0 mr-lg-1"></i><span class="d-none d-lg-inline">Wordlist</span></a>
     </li>
         {% elif session.hashcat.mode == 3 %}
     <li class="nav-item">
-        <a class="nav-link {{ 'active' if active_nav == 'mask' }}" href="{{ url_for('sessions.setup_mask', session_id=session.id) }}"><i class="fas fa-fw fa-sliders-h mr-1"></i>Mask</a>
+        <a class="nav-link text-center text-lg-left {{ 'active' if active_nav == 'mask' }}" href="{{ url_for('sessions.setup_mask', session_id=session.id) }}" title="Mask"><i class="fas fa-fw fa-sliders-h mr-0 mr-lg-1"></i><span class="d-none d-lg-inline">Mask</span></a>
     </li>
         {% endif %}
     {% endif %}
     <li class="nav-item">
-        <a class="nav-link {{ 'active' if active_nav == 'settings' }}" href="{{ url_for('sessions.settings', session_id=session.id) }}"><i class="fas fa-fw fa-cog mr-1"></i>Settings</a>
+        <a class="nav-link text-center text-lg-left {{ 'active' if active_nav == 'settings' }}" href="{{ url_for('sessions.settings', session_id=session.id) }}" title="Settings"><i class="fas fa-fw fa-cog mr-0 mr-lg-1"></i><span class="d-none d-lg-inline">Settings</span></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link {{ 'active' if active_nav == 'files' }}" href="{{ url_for('sessions.files', session_id=session.id) }}"><i class="fas fa-fw fa-folder-open mr-1"></i>Files</a>
+        <a class="nav-link text-center text-lg-left {{ 'active' if active_nav == 'files' }}" href="{{ url_for('sessions.files', session_id=session.id) }}" title="Files"><i class="fas fa-fw fa-folder-open mr-0 mr-lg-1"></i><span class="d-none d-lg-inline">Files</span></a>
     </li>
     {% if session.hashcat.contains_usernames == 1 %}
     <li class="nav-item">
-        <a class="nav-link {{ 'active' if active_nav == 'browse' }}" href="{{ url_for('sessions.browse', session_id=session.id) }}"><i class="fas fa-fw fa-user-ninja mr-1"></i>Browse</a>
+        <a class="nav-link text-center text-lg-left {{ 'active' if active_nav == 'browse' }}" href="{{ url_for('sessions.browse', session_id=session.id) }}" title="Browse cracked passwords"><i class="fas fa-fw fa-user-ninja mr-0 mr-lg-1"></i><span class="d-none d-lg-inline">Browse</span></a>
     </li>
     {% endif %}
 </ul>

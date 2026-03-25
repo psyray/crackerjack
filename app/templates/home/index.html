@@ -67,20 +67,20 @@
                     </div>
                 </div>
 
-                <div class="table-responsive">
-                <table class="table table-sm table-striped">
+                <div class="cj-datatable-wrap">
+                <table class="table table-sm table-striped table-sessions-list w-100">
                     <thead>
                     <tr>
                         <th>ID</th>
                         {% if current_user.admin %}
                         <th>User</th>
                         {% endif %}
-                        <th>Name</th>
+                        <th class="all">Name</th>
                         <th>State</th>
                         <th class="text-right">Progress</th>
                         <th class="text-right">Cracked</th>
-                        <th class="text-center">State</th>
-                        <th></th>
+                        <th class="text-center">Visible</th>
+                        <th class="text-center" data-dt-order="disable"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -133,4 +133,17 @@
     </div>
     <div class="d-none d-lg-block col-lg-1"></div>
 </div>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/lib/datatables.min.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='js/lib/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/crackerjack/datatables.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        CJ_DataTables.init('.table-sessions-list', {
+            order: [[0, 'desc']],
+            language: { search: 'Search sessions:' },
+            columnDefs: [{ targets: -1, orderable: false, searchable: false }]
+        });
+    });
+</script>
 {% endblock %}

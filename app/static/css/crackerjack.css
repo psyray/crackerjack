@@ -43,6 +43,22 @@ pre {
         flex: 0 0 100%;
         max-width: 100%;
     }
+
+    /* Session sidebar: icon-only toolbar, horizontal scroll if many items */
+    .session-subnav {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.25rem;
+    }
+
+    .session-subnav .nav-item {
+        flex-shrink: 0;
+    }
+
+    .session-subnav .nav-link {
+        padding: 0.45rem 0.55rem;
+        text-align: center;
+    }
 }
 
 @media (max-width: 767.98px) {
@@ -97,18 +113,23 @@ pre {
     .cj-datatable-wrap table.dataTable > thead > tr > th,
     .table-cracked.dataTable > tbody > tr > td,
     .table-cracked.dataTable > tbody > tr > th,
-    .table-cracked.dataTable > thead > tr > th {
+    .table-cracked.dataTable > thead > tr > th,
+    .table-sessions-list.dataTable > tbody > tr > td,
+    .table-sessions-list.dataTable > tbody > tr > th,
+    .table-sessions-list.dataTable > thead > tr > th {
         white-space: normal;
     }
 
     .cj-datatable-wrap table.dataTable tbody tr.child td,
-    .table-cracked.dataTable tbody tr.child td {
+    .table-cracked.dataTable tbody tr.child td,
+    .table-sessions-list.dataTable tbody tr.child td {
         white-space: normal;
         word-break: break-word;
     }
 
     .cj-datatable-wrap table.dataTable tbody tr.child ul,
-    .table-cracked.dataTable tbody tr.child ul {
+    .table-cracked.dataTable tbody tr.child ul,
+    .table-sessions-list.dataTable tbody tr.child ul {
         padding-left: 1.25rem;
         margin-bottom: 0;
     }
