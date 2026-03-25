@@ -12,7 +12,8 @@ class HashcatManager:
         self.autoid = autoid
 
     def get_supported_hashes(self):
-        output = self.shell.execute([self.hashcat_binary, '--help'], user_id=0, log_to_db=False)
+        # `-hh` is required to include the full "Hash Modes" table.
+        output = self.shell.execute([self.hashcat_binary, '-hh'], user_id=0, log_to_db=False)
 
         # Split lines using \n and run strip against all elements of the list.
         lines = list(map(str.strip, output.split("\n")))
@@ -68,9 +69,13 @@ class HashcatManager:
         alphanum_hashes = {}
         parent_code = ''
         for line in lines:
-            if line == '- [ Hash modes ] -':
+            if line.lower() == '- [ hash modes ] -':
                 found = True
+            elif found and line.startswith('- [') and line.endswith('] -') and len(hashes) > 0:
+                # Stop when we hit the next help section header.
+                break
             elif found and line == '' and len(hashes) > 0:
+                # Backward-compatible stop condition for older formats.
                 break
             elif found and line != '':
                 if line[0] == '#' or line[0] == '=':
@@ -110,14 +115,19 @@ class HashcatManager:
 
         grouped = {}
         for parent_type, data in alphanum_hashes.items():
+            x_values = data.get('data', {}).get('X', [])
+            y_values = data.get('data', {}).get('Y', [])
+            if not x_values or not y_values:
+                continue
+
             grouped[data['code']] = {
                 'category': data['category'],
                 'items': {}
             }
-            for type1 in data['data']['X']:
+            for type1 in x_values:
                 code1 = type1[0].strip()
                 name1 = type1[3:].strip()
-                for type2 in data['data']['Y']:
+                for type2 in y_values:
                     code2 = type2[0].strip()
                     name2 = type2[3:].strip()
 
@@ -492,13 +502,13 @@ class HashcatManager:
 
         # progress
         if 'Progress' in raw:
-            matches = re.findall('\((\d+.\d+)', raw['Progress'])
+            matches = re.findall(r'\((\d+\.\d+)', raw['Progress'])
             if len(matches) == 1:
                 data['progress'] = matches[0]
 
         # passwords
         if 'Recovered' in raw:
-            matches = re.findall('(\d+/\d+)', raw['Recovered'])
+            matches = re.findall(r'(\d+/\d+)', raw['Recovered'])
             if len(matches) > 0:
                 passwords = matches[0].split('/')
                 if len(passwords) == 2:
@@ -507,13 +517,13 @@ class HashcatManager:
 
         # time remaining
         if 'Time.Estimated' in raw:
-            matches = re.findall('\((.*)\)', raw['Time.Estimated'])
+            matches = re.findall(r'\((.*)\)', raw['Time.Estimated'])
             if len(matches) == 1:
                 data['time_remaining'] = 'Finished' if matches[0] == '0 secs' else matches[0].strip()
 
         # estimated completion time
         if 'Time.Estimated' in raw:
-            matches = re.findall('(.*)\(', raw['Time.Estimated'])
+            matches = re.findall(r'(.*)\(', raw['Time.Estimated'])
             if len(matches) == 1:
                 data['estimated_completion_time'] = matches[0].strip()
 

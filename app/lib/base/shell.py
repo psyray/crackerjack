@@ -18,7 +18,16 @@ class ShellManager:
         if log_to_db:
             log = self.__log_start(' '.join(command), user_id)
 
-        output = subprocess.run(command, stdout=subprocess.PIPE).stdout.decode().strip()
+        proc = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        stdout = proc.stdout.decode(errors='replace').strip()
+        stderr = proc.stderr.decode(errors='replace').strip()
+
+        if stdout:
+            output = stdout
+        elif stderr:
+            output = stderr
+        else:
+            output = ''
 
         if log_to_db:
             log = self.__log_finish(log, output)

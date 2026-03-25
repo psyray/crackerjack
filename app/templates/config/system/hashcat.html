@@ -12,6 +12,16 @@
 
             <h4>Hashcat Settings</h4>
 
+            {% if detected_hashcat_version %}
+            <div class="alert alert-info">
+                Detected hashcat version from configured binary: <b>{{ detected_hashcat_version }}</b>
+            </div>
+            {% else %}
+            <div class="alert alert-warning">
+                Could not detect hashcat version from configured binary.
+            </div>
+            {% endif %}
+
             <div class="form-group">
                 <label for="hashcat_binary">Executable Path</label>
                 <input name="hashcat_binary" type="text" id="hashcat_binary" class="form-control" value="{{ setting_get('hashcat_binary', '') }}" placeholder="/path/to/hashcat" required>

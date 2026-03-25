@@ -5,14 +5,26 @@ from flask import render_template, redirect, url_for, flash, request
 import os
 from app.lib.base.provider import Provider
 from app.lib.base.decorators import admin_required
+from app.lib.base.system import normalize_hashcat_version
 
 
 @bp.route('/hashcat', methods=['GET'])
 @login_required
 @admin_required
 def hashcat():
+    provider = Provider()
+    settings = provider.settings()
+    shell = provider.shell()
+
+    hashcat_binary = settings.get('hashcat_binary', '')
+    detected_version = ''
+    if hashcat_binary and os.path.isfile(hashcat_binary) and os.access(hashcat_binary, os.X_OK):
+        raw = shell.execute([hashcat_binary, '--version'], user_id=0, log_to_db=False)
+        detected_version = normalize_hashcat_version(raw)
+
     return render_template(
         'config/system/hashcat.html',
+        detected_hashcat_version=detected_version,
     )
 
 

@@ -1,7 +1,33 @@
 import os
 import getpass
 import datetime
+import re
 from packaging import version
+
+
+_SEMVER_RE = re.compile(r'(\d+\.\d+\.\d+)')
+_PAREN_V_RE = re.compile(r'\(v([^)]+)\)')
+
+
+def normalize_hashcat_version(raw: str) -> str:
+    raw = (raw or '').strip()
+    if not raw:
+        return ''
+
+    # Example: "hashcat (v7.1.2-382-g2d71af371) starting ..."
+    m = _PAREN_V_RE.search(raw)
+    if m:
+        return f"v{m.group(1).strip()}"
+
+    # Example: "v7.1.2-382-g2d71af371"
+    first_line = raw.splitlines()[0].strip()
+    return first_line
+
+
+def extract_semver(raw: str) -> str:
+    raw = (raw or '').strip()
+    m = _SEMVER_RE.search(raw)
+    return m.group(1) if m else ''
 
 
 class SystemManager:
@@ -15,12 +41,16 @@ class SystemManager:
         self.update_autoid()
 
     def update_autoid(self):
-        current_version = self.settings.get('hashcat_version', '').replace('v', '').strip()
+        current_version_raw = self.settings.get('hashcat_version', '').strip()
+        current_semver = extract_semver(current_version_raw)
         has_autoid = False
-        if len(current_version) > 0:
+        if current_semver:
             minimum_version = '6.2.3'
-            if version.parse(current_version) >= version.parse(minimum_version):
-                has_autoid = True
+            try:
+                if version.parse(current_semver) >= version.parse(minimum_version):
+                    has_autoid = True
+            except version.InvalidVersion:
+                has_autoid = False
 
         self.settings.save('hashcat_autoid', 1 if has_autoid else 0)
         return True
@@ -34,8 +64,12 @@ class SystemManager:
         elif not os.access(hashcat_binary, os.X_OK):
             return False
 
-        version = self.shell.execute([hashcat_binary, '--version'], user_id=0)
-        self.settings.save('hashcat_version', version)
+        raw = self.shell.execute([hashcat_binary, '--version'], user_id=0)
+        normalized = normalize_hashcat_version(raw)
+        if raw:
+            self.settings.save('hashcat_version_raw', raw)
+        if normalized:
+            self.settings.save('hashcat_version', normalized)
         return True
 
     def update_git_hash_version(self):
