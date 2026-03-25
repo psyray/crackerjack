@@ -13,12 +13,12 @@
         <div class="card">
             <h4 class="card-header">Browse Cracked Passwords</h4>
             <div class="card-body">
-                <div class="table-responsive">
-                <table class="table table-sm table-striped table-cracked">
+                <div class="cj-datatable-wrap">
+                <table class="table table-sm table-striped table-cracked w-100">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Username</th>
+                        <th class="all">#</th>
+                        <th class="all">Username</th>
                         <th>Password</th>
                     </tr>
                     </thead>
@@ -38,6 +38,7 @@
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/datatables.min.css') }}">
 <script type="text/javascript" src="{{ url_for('static', filename='js/lib/datatables.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/crackerjack/datatables.js') }}"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -68,9 +69,7 @@
 
             $(tRow).remove();
 
-            $('.table-cracked').DataTable({
-                pageLength: 100
-            });
+            CJ_DataTables.init('.table-cracked', { pageLength: 100 });
         }
 
     });

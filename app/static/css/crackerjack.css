@@ -52,8 +52,9 @@ pre {
         font-size: 1.1rem;
     }
 
-    .table-responsive .table th,
-    .table-responsive .table td {
+    /* Do not force nowrap on DataTables + Responsive (child rows carry overflow). */
+    .table-responsive .table:not(.dataTable) th,
+    .table-responsive .table:not(.dataTable) td {
         white-space: nowrap;
     }
 
@@ -61,22 +62,55 @@ pre {
         font-size: 1.5rem;
     }
 
-    .table-cracked_wrapper .dataTables_length,
-    .table-cracked_wrapper .dataTables_filter {
+    /* DataTables 2 uses div.dt-container and dt-* feature classes (not dataTables_*). */
+    .cj-datatable-wrap .dt-container div.dt-length,
+    .cj-datatable-wrap .dt-container div.dt-search,
+    .cj-datatable-wrap .dt-container div.dt-info,
+    .cj-datatable-wrap .dt-container div.dt-paging {
         float: none !important;
         text-align: left !important;
     }
 
-    .table-cracked_wrapper .dataTables_filter input,
-    .table-cracked_wrapper .dataTables_length select {
+    .cj-datatable-wrap .dt-container div.dt-search input,
+    .cj-datatable-wrap .dt-container div.dt-length select {
         width: 100%;
         max-width: 100%;
         margin-left: 0;
+        display: block;
     }
 
-    .table-cracked td,
-    .table-cracked th {
-        white-space: nowrap;
+    .cj-datatable-wrap .dt-container div.dt-search label {
+        display: block;
+        width: 100%;
+    }
+
+    .cj-datatable-wrap .dt-container div.dt-paging {
+        margin-top: 0.5rem;
+    }
+
+    .cj-datatable-wrap .dt-container div.dt-paging ul.pagination {
+        justify-content: flex-start !important;
+    }
+
+    .cj-datatable-wrap table.dataTable > tbody > tr > td,
+    .cj-datatable-wrap table.dataTable > tbody > tr > th,
+    .cj-datatable-wrap table.dataTable > thead > tr > th,
+    .table-cracked.dataTable > tbody > tr > td,
+    .table-cracked.dataTable > tbody > tr > th,
+    .table-cracked.dataTable > thead > tr > th {
+        white-space: normal;
+    }
+
+    .cj-datatable-wrap table.dataTable tbody tr.child td,
+    .table-cracked.dataTable tbody tr.child td {
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .cj-datatable-wrap table.dataTable tbody tr.child ul,
+    .table-cracked.dataTable tbody tr.child ul {
+        padding-left: 1.25rem;
+        margin-bottom: 0;
     }
 
     .sessions-browse-row {
