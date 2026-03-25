@@ -47,6 +47,9 @@ This allows CrackerJack to be future-proof as it ties to the input/output of Has
 * Multi-user support (local and/or LDAP).
 * Wordlist/Mask/Rule support.
 * Multiple theme support ([Bootswatch](https://bootswatch.com/)).
+* Improved compatibility with newer hashcat releases (including v7.x help/version output formats).
+* Improved responsive layout for phone and tablet on key pages.
+* DataTables with the [Responsive extension](https://datatables.net/extensions/responsive/) (bundled) and a shared init helper; see [docs/datatables.md](docs/datatables.md).
 * Straight-forward setup.
   * Entire configuration is via the GUI. No need for manually editing config files.
   * Run locally on Linux and Windows (WSL).

@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.3
+
+* `[Update]` Improve hashcat compatibility with newer help output formats (including `Hash Modes` section parsing from `-hh` output).
+* `[Fix]` Remove Python regex escape warnings in hashcat status parsing.
+* `[Fix]` Improve hashcat version detection by handling command output more robustly and storing a normalized short version for the UI (for example `7.1.2`).
+* `[Update]` Keep the raw hashcat version output for troubleshooting in settings (`hashcat_version_raw`).
+* `[Update]` Improve responsive behavior across key pages for phone and tablet usage (session pages, headers, and large tables).
+* `[Update]` Use DataTables Responsive (bundled) and `CJ_DataTables` helper for cracked-password browse; document bundle and conventions in `docs/datatables.md`.
+* `[Update]` DataTables with search and sort on the dashboard session list; session sub-navigation shows icons in a horizontal row on small screens with labels from the `lg` breakpoint.
+* `[Update]` Enable standard mobile zoom behavior by updating the viewport meta tag.
+
 ## v1.2.3
 
 * `[New]` Added KeePass module (PR #20) - Credits to [swisskyrepo](https://github.com/swisskyrepo).

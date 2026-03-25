@@ -37,6 +37,16 @@ Example (Browse cracked passwords):
 CJ_DataTables.init('.table-cracked', { pageLength: 100 });
 ```
 
+Example (Dashboard session list, `home/index.html`):
+
+```javascript
+CJ_DataTables.init('.table-sessions-list', {
+    order: [[0, 'desc']],
+    language: { search: 'Search sessions:' },
+    columnDefs: [{ targets: -1, orderable: false, searchable: false }]
+});
+```
+
 ## Column visibility
 
 For the Responsive extension, prefer:
