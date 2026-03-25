@@ -6,12 +6,13 @@
 {% include 'sessions/includes/header.html' %}
 
 <div class="row mt-5">
-    <div class="col-2">
+    <div class="col-12 col-lg-2 mb-3 mb-lg-0">
         {% include 'sessions/includes/nav.html' %}
     </div>
-    <div class="col">
+    <div class="col-12 col-lg-10">
         <div class="row">
-            <div class="col">
+            <div class="col-12 col-xl-6">
+                <div class="table-responsive">
                 <table class="table table-striped">
                     <tbody>
                     <tr>
@@ -68,8 +69,10 @@
                     {% endif %}
                     </tbody>
                 </table>
+                </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-xl-6">
+                <div class="table-responsive">
                 <table class="table table-striped">
                     <tbody>
                     <tr>
@@ -114,14 +117,15 @@
                     </tr>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-2"></div>
-    <div class="col">
+    <div class="col-12 col-lg-2"></div>
+    <div class="col-12 col-lg-10">
         <div>
             <a href="#" class="raw-progress btn btn-warning">
                 {% if session.hashcat.state == 98 %}
@@ -138,6 +142,7 @@
         </div>
         {% if session.hashcat_history|length > 0 %}
         <div id="hashcat-history" class="d-none mt-4">
+            <div class="table-responsive">
             <table class="table table-sm table-striped">
                 <thead>
                 <tr>
@@ -189,9 +194,11 @@
                 {% endfor %}
                 </tbody>
             </table>
+            </div>
         </div>
         {% endif %}
         <div id="raw-progress" class="d-none mt-4">
+            <div class="table-responsive">
             <table class="table table-sm table-striped">
                 <tbody>
                 {% for key, value in session.hashcat.data_raw.items() %}
@@ -210,6 +217,7 @@
                 {% endif %}
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 </div>

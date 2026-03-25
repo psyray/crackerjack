@@ -14,10 +14,10 @@
 {% include 'sessions/includes/header.html' %}
 
 <div class="row mt-5">
-    <div class="col-2">
+    <div class="col-12 col-lg-2 mb-3 mb-lg-0">
         {% include 'sessions/includes/nav.html' %}
     </div>
-    <div class="col">
+    <div class="col-12 col-lg-10">
         <form id="setup-hashcat" method="post" enctype="multipart/form-data" action="{{ url_for('sessions.setup_wordlist_save', session_id=session.id) }}" autocomplete="off">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 

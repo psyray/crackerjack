@@ -26,3 +26,38 @@ pre {
     white-space: pre-wrap;
     word-break: break-all;
 }
+
+@media (max-width: 991.98px) {
+    #form-action .form-action {
+        width: 100%;
+        margin-left: 0 !important;
+    }
+
+    #setup-mask #mask-template .row > [class*="col-"] {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+
+    #setup-mask #mask-template .row .col-4,
+    #setup-mask #mask-template .row .col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .card-header h3,
+    .card-header h4,
+    .card-header h5 {
+        font-size: 1.1rem;
+    }
+
+    .table-responsive .table th,
+    .table-responsive .table td {
+        white-space: nowrap;
+    }
+
+    h1.d-inline-block {
+        font-size: 1.5rem;
+    }
+}

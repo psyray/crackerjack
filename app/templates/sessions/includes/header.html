@@ -1,18 +1,18 @@
 <div class="row mt-5">
-    <div class="col-2"></div>
-    <div class="col">
+    <div class="col-12 col-lg-2"></div>
+    <div class="col-12 col-lg-10">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-lg-6 mb-3 mb-lg-0">
                 <div>
                     <h1 class="d-inline-block" title="Internal Session Name: {{ session.name }}">{{ session.description if (session.description and session.description|length > 0) else session.name }}</h1>
                     <span class="badge badge-pill badge-{{ template().get_hashcat_running_class(session.hashcat.state) }}" style="vertical-align: top">{{ template().get_hashcat_running_text(session.hashcat.state) }}</span>
                 </div>
             </div>
-            <div class="col text-right">
+            <div class="col-12 col-lg-6">
                 {% if session.validation|length > 0 %}
                 <button type="button" class="btn btn-warning" title="" data-container="body" data-toggle="popover" data-placement="left" data-content="* {{ session.validation|join('<br>* ') }}<br><br>Once you have fixed all the above issues, you will be able to start your session." data-original-title="Missing Configuration">Click here to identify missing configuration</button>
                 {% else %}
-                <form method="post" action="{{ url_for('sessions.action', session_id=session.id) }}" id="form-action" autocomplete="off">
+                <form method="post" action="{{ url_for('sessions.action', session_id=session.id) }}" id="form-action" autocomplete="off" class="d-flex flex-wrap justify-content-start justify-content-lg-end">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="action" id="action" value="">
 
@@ -23,22 +23,22 @@
                             session.hashcat.state == 98
                     %}
                     {% if session.hashcat.state == 2 or session.hashcat.state == 98 %}
-                    <a href="#" data-action="restore" title="Restore" class="form-action ml-2 btn btn-info"><i class="fas fa-redo"></i> Restore</a>
+                    <a href="#" data-action="restore" title="Restore" class="form-action ml-0 ml-lg-2 mb-2 btn btn-info"><i class="fas fa-redo"></i> Restore</a>
                     {% endif %}
-                    <a href="#" data-action="start" title="Start" class="form-action ml-2 btn btn-success"><i class="fas fa-play-circle"></i> Start</a>
-                    <a href="#" data-action="reset" title="Reset - If the session won't start click this link" class="form-action ml-2 btn btn-danger"><i class="fas fa-sync"></i> Rebuild</a>
+                    <a href="#" data-action="start" title="Start" class="form-action ml-0 ml-lg-2 mb-2 btn btn-success"><i class="fas fa-play-circle"></i> Start</a>
+                    <a href="#" data-action="reset" title="Reset - If the session won't start click this link" class="form-action ml-0 ml-lg-2 mb-2 btn btn-danger"><i class="fas fa-sync"></i> Rebuild</a>
                     {% endif %}
 
                     {% if session.hashcat.state == 4 %}
-                    <a href="#" data-action="resume" title="Resume" class="form-action ml-2 btn btn-success"><i class="fas fa-play-circle"></i> Continue</a>
+                    <a href="#" data-action="resume" title="Resume" class="form-action ml-0 ml-lg-2 mb-2 btn btn-success"><i class="fas fa-play-circle"></i> Continue</a>
                     {% endif %}
 
                     {% if session.hashcat.state == 1 %}
-                    <a href="#" data-action="pause" title="Pause" class="form-action ml-2 btn btn-warning"><i class="fas fa-pause-circle"></i> Pause</a>
+                    <a href="#" data-action="pause" title="Pause" class="form-action ml-0 ml-lg-2 mb-2 btn btn-warning"><i class="fas fa-pause-circle"></i> Pause</a>
                     {% endif %}
 
                     {% if session.hashcat.state == 1 or session.hashcat.state == 4 %}
-                    <a href="#" data-action="stop" title="Stop" class="form-action ml-2 btn btn-danger"><i class="fas fa-stop-circle"></i> Stop</a>
+                    <a href="#" data-action="stop" title="Stop" class="form-action ml-0 ml-lg-2 mb-2 btn btn-danger"><i class="fas fa-stop-circle"></i> Stop</a>
                     {% endif %}
                 </form>
                 {% endif %}
@@ -61,8 +61,8 @@
                 <div>Estimated Time: <abbr title="{{ session.hashcat.estimated_completion_time }}">{{ session.hashcat.time_remaining }}</abbr></div>
                 <div>Termination Time: <abbr title="You can set this from the session's settings menu on the left">{{ session.terminate_at }}</abbr></div>
             </div>
-            <div class="col">
-                <div class="float-right">
+            <div class="col-12 col-lg mt-2 mt-lg-0">
+                <div class="float-none float-lg-right">
                     <label for="autorefresh" class="mr-2">Auto Refresh Page While Running</label>
                     <div class="custom-control custom-switch float-right">
                         <input type="checkbox" class="custom-control-input" id="autorefresh" value="1" checked>
