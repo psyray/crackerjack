@@ -4,21 +4,22 @@
 
 {% include 'sessions/includes/header.html' %}
 
-<div class="row mt-5">
-    <div class="col-2">
+<div class="row mt-5 sessions-browse-row">
+    <div class="col-12 col-lg-2 mb-3 mb-lg-0">
         {% set active_nav = 'browse' %}
         {% include 'sessions/includes/nav.html' %}
     </div>
-    <div class="col">
+    <div class="col-12 col-lg-10">
         <div class="card">
             <h4 class="card-header">Browse Cracked Passwords</h4>
             <div class="card-body">
+                <div class="table-responsive">
                 <table class="table table-sm table-striped table-cracked">
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th class="w-50">Username</th>
-                        <th class="w-50">Password</th>
+                        <th>Username</th>
+                        <th>Password</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,11 +30,10 @@
                     </tr>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="col-2"></div>
 </div>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/datatables.min.css') }}">

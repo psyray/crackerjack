@@ -19,12 +19,12 @@ class HashcatVersionNormalizationTestCase(unittest.TestCase):
 
     def test_normalize_hashcat_version_from_plain_version(self) -> None:
         normalize = self.mod.normalize_hashcat_version
-        self.assertEqual(normalize("v7.1.2-382-g2d71af371"), "v7.1.2-382-g2d71af371")
+        self.assertEqual(normalize("v7.1.2-382-g2d71af371"), "7.1.2")
 
     def test_normalize_hashcat_version_from_parenthesized(self) -> None:
         normalize = self.mod.normalize_hashcat_version
         raw = "hashcat (v7.1.2-382-g2d71af371) starting in help mode"
-        self.assertEqual(normalize(raw), "v7.1.2-382-g2d71af371")
+        self.assertEqual(normalize(raw), "7.1.2")
 
     def test_extract_semver(self) -> None:
         extract = self.mod.extract_semver

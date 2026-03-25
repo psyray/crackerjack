@@ -60,4 +60,34 @@ pre {
     h1.d-inline-block {
         font-size: 1.5rem;
     }
+
+    .table-cracked_wrapper .dataTables_length,
+    .table-cracked_wrapper .dataTables_filter {
+        float: none !important;
+        text-align: left !important;
+    }
+
+    .table-cracked_wrapper .dataTables_filter input,
+    .table-cracked_wrapper .dataTables_length select {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+    }
+
+    .table-cracked td,
+    .table-cracked th {
+        white-space: nowrap;
+    }
+
+    .sessions-browse-row {
+        margin-top: 1rem !important;
+    }
+
+    .sessions-browse-row .card-header {
+        padding: 0.65rem 1rem;
+    }
+
+    .sessions-browse-row .card-body {
+        padding: 0.75rem;
+    }
 }

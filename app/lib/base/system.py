@@ -14,12 +14,16 @@ def normalize_hashcat_version(raw: str) -> str:
     if not raw:
         return ''
 
-    # Example: "hashcat (v7.1.2-382-g2d71af371) starting ..."
+    # Prefer a short semantic version in the UI (e.g. 7.1.2).
+    semver = extract_semver(raw)
+    if semver:
+        return semver
+
+    # Fallback to parenthesized and first-line formats when no semver is found.
     m = _PAREN_V_RE.search(raw)
     if m:
-        return f"v{m.group(1).strip()}"
+        return m.group(1).strip()
 
-    # Example: "v7.1.2-382-g2d71af371"
     first_line = raw.splitlines()[0].strip()
     return first_line
 

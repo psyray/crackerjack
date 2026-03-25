@@ -5,11 +5,11 @@
 {% include 'sessions/includes/header.html' %}
 
 <div class="row mt-5">
-    <div class="col-2">
+    <div class="col-12 col-lg-2 mb-3 mb-lg-0">
         {% set active_nav = 'settings' %}
         {% include 'sessions/includes/nav.html' %}
     </div>
-    <div class="col">
+    <div class="col-12 col-lg-8">
         <div class="card">
             <h4 class="card-header">Settings</h4>
             <div class="card-body">
@@ -18,7 +18,7 @@
 
                     <label>Session will terminate on</label>
                     <div class="row">
-                        <div class="col">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <div class="input-group date" id="termination-date" data-target-input="nearest">
                                     <input type="text" class="form-control datetimepicker-input text-right" name="termination_date" data-target="#termination-date" placeholder="date">
@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <div class="input-group date" id="termination-time" data-target-input="nearest">
                                     <input type="text" class="form-control datetimepicker-input text-right" name="termination_time" data-target="#termination-time" placeholder="time">
@@ -56,7 +56,7 @@
         </div>
     </div>
 
-    <div class="col"></div>
+    <div class="d-none d-lg-block col-lg-2"></div>
 </div>
 
 <script type="text/javascript">
