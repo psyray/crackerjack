@@ -126,6 +126,20 @@
                     </tr>
                     {% endfor %}
                     </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        {% if current_user.admin %}
+                        <th>User</th>
+                        {% endif %}
+                        <th>Name</th>
+                        <th>State</th>
+                        <th class="text-right">Progress</th>
+                        <th class="text-right">Cracked</th>
+                        <th class="text-center">Visible</th>
+                        <th></th>
+                    </tr>
+                    </tfoot>
                 </table>
                 </div>
             </div>
@@ -142,7 +156,8 @@
         CJ_DataTables.init('.table-sessions-list', {
             order: [[0, 'desc']],
             language: { search: 'Search sessions:' },
-            columnDefs: [{ targets: -1, orderable: false, searchable: false }]
+            columnDefs: [{ targets: -1, orderable: false, searchable: false }],
+            individualColumnSearch: true
         });
     });
 </script>

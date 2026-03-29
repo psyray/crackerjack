@@ -24,6 +24,12 @@ Use `app/static/js/crackerjack/datatables.js`, which exposes `CJ_DataTables`:
 * `CJ_DataTables.defaultOptions()` — copy of shared defaults (`responsive: true`, DataTables 2 default `layout`, no `scrollX` by default).
 * `CJ_DataTables.init(selector, overrides)` — merges overrides into defaults and calls `.DataTable(...)`.
 
+### Individual column searching
+
+To enable per-column text filters (cumulative with the global search), set `individualColumnSearch: true` and add a `<tfoot>` row whose `<th>` cells align with `<thead>` (same column count and order, including conditional columns). See the [DataTables example](https://datatables.net/examples/api/multi_filter.html).
+
+`CJ_DataTables` strips `individualColumnSearch` before passing options to DataTables and wires `column().search()` from inputs in the footer. Columns marked non-searchable (for example action buttons) get no input.
+
 Load order on a page:
 
 1. jQuery (already in `layout/head.html`)
@@ -34,7 +40,7 @@ Load order on a page:
 Example (Browse cracked passwords):
 
 ```javascript
-CJ_DataTables.init('.table-cracked', { pageLength: 100 });
+CJ_DataTables.init('.table-cracked', { pageLength: 100, individualColumnSearch: true });
 ```
 
 Example (Dashboard session list, `home/index.html`):
@@ -43,7 +49,8 @@ Example (Dashboard session list, `home/index.html`):
 CJ_DataTables.init('.table-sessions-list', {
     order: [[0, 'desc']],
     language: { search: 'Search sessions:' },
-    columnDefs: [{ targets: -1, orderable: false, searchable: false }]
+    columnDefs: [{ targets: -1, orderable: false, searchable: false }],
+    individualColumnSearch: true
 });
 ```
 

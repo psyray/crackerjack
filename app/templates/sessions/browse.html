@@ -29,6 +29,13 @@
                         <td class="row-password"></td>
                     </tr>
                     </tbody>
+                    <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                    </tr>
+                    </tfoot>
                 </table>
                 </div>
             </div>
@@ -69,7 +76,7 @@
 
             $(tRow).remove();
 
-            CJ_DataTables.init('.table-cracked', { pageLength: 100 });
+            CJ_DataTables.init('.table-cracked', { pageLength: 100, individualColumnSearch: true });
         }
 
     });
