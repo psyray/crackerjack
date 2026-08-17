@@ -1,13 +1,13 @@
-Flask<2.0.0
-Flask-SQLAlchemy==2.5.1
-Flask-Migrate==4.0.1
+Flask>=2.2,<3.0
+Flask-SQLAlchemy>=3.1,<4.0
+Flask-Migrate>=4.0,<5.0
 Flask-Login==0.6.2
 Flask-Bcrypt==1.0.1
 Flask-WTF==1.2.1
 ldap3==2.9.1 # TODO - Replace with Flask ldap3 Login
-gunicorn==21.2.0
+gunicorn>=22.0,<24.0
 Flask-Crontab==0.1.2
 packaging
 pywebpush
-markupsafe==2.0.1
-sqlalchemy==1.4.39
+markupsafe>=2.1
+sqlalchemy>=2.0,<3.0

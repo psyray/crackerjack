@@ -90,6 +90,6 @@ class ShellManager:
         if page == 0 and per_page == 0:
             logs = logs.all()
         else:
-            logs = logs.paginate(page, per_page, False)
+            logs = logs.paginate(page=page, per_page=per_page, error_out=False)
 
         return logs
